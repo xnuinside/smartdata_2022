@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  prefect:
+    image: prefecthq/prefect:2.6.1-python3.9
+    command: prefect orion start --host 0.0.0.0
+    restart: always
+    environment:
+      - PREFECT_ORION_DATABASE_CONNECTION_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/orion
+    ports:
+      - 4200:4200
+
+  prefect_work_queue:
+    image: prefecthq/prefect:2.6.1-python3.9
+    entrypoint: prefect work-queue create default
+    environment:
+      - PREFECT_API_URL=http://prefect:4200/api
+    restart: on-failure
+    depends_on:
+      - prefect
+      - postgres
+
+  prefect_agent:
+    image: prefecthq/prefect:2.6.1-python3.9
+    command: prefect agent start default
+    environment:
+      - PREFECT_API_URL=http://prefect:4200/api
+    restart: on-failure
+    depends_on:
+      - prefect
+      - postgres
+      - prefect_work_queue
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=orion
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-prefect:/var/lib/postgresql/data
+      
+volumes:
+  db-prefect:
+    driver: local
