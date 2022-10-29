@@ -18,10 +18,20 @@ go to http://localhost:4200
 
 ### Deploy flow 
 
+Create deployment build
 
-```bash
+```console
 
-    
+    prefect deployment build prefect_flows/main_flow_empty.py:db_data_process_flow --name first
+
+```
+
+
+Apply build
+
+```console
+
+   prefect deployment apply db_data_process_flow-deployment.yaml
 
 ```
 

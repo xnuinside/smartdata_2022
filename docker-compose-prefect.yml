@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   prefect:
-    image: prefecthq/prefect:2.6.1-python3.9
+    image: prefecthq/prefect:2.6.5-python3.9
     command: prefect orion start --host 0.0.0.0
     restart: always
     environment:
@@ -10,8 +10,9 @@ services:
     ports:
       - 4200:4200
 
+# needed only once - after you can comment it 
   prefect_work_queue:
-    image: prefecthq/prefect:2.6.1-python3.9
+    image: prefecthq/prefect:2.6.5-python3.9
     entrypoint: prefect work-queue create default
     environment:
       - PREFECT_API_URL=http://prefect:4200/api
@@ -21,7 +22,7 @@ services:
       - postgres
 
   prefect_agent:
-    image: prefecthq/prefect:2.6.1-python3.9
+    image: prefecthq/prefect:2.6.5-python3.9
     command: prefect agent start default
     environment:
       - PREFECT_API_URL=http://prefect:4200/api
