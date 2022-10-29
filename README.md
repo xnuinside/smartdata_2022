@@ -1,5 +1,9 @@
 # smartdata_2022
 
+In this talk I explain why it is totally wrong to compare Prefect vs Apache Airflow & why no sense to try do same pipelines as on Apache Airflow in Prefect. 
+
+So main_flow.py is a bad example by idea. Code is correct & it is working, but it is a bad example of Prefect Usage.
+
 
 ### Up & Run prefect cluster
 
@@ -34,12 +38,3 @@ Apply build
    prefect deployment apply db_data_process_flow-deployment.yaml
 
 ```
-
-
-### Up & Run Apache Airflow sample
-If you want to up & run Apache Airflow cluster to test airflow dag - use docker-compose from this repo: 
-
-
-
-
-

@@ -23,7 +23,6 @@ def if_skip_do_something():
 @task
 def if_not_skip_do_something_func():
     get_run_logger().info(f"Task {if_not_skip_do_something_func.__name__}")
-    raise
 
 
 @task
