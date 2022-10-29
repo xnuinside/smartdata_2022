@@ -38,3 +38,23 @@ Apply build
    prefect deployment apply db_data_process_flow-deployment.yaml
 
 ```
+
+
+### Prefect run from console
+
+Run server
+
+```
+
+    prefect orion start
+
+```
+
+
+Run agent
+
+```
+
+    prefect agent start default
+
+```

@@ -43,6 +43,6 @@ def DataFrame_processing(path_to_csv: str):
 
 if __name__ == "__main__":
     
-    path_to_csv = 'your_path_to_csv'
+    path_to_csv = 'path/to/your/csv'
     
     DataFrame_processing(path_to_csv)
